@@ -11,6 +11,7 @@ FactoryGirl.define do
     zip { Faker::Address.zip_code }
     email { Faker::Internet.email }
     password 'password'
+    password_confirmation 'password'
   end
 
   # This will use the User class (Admin would have been guessed)
@@ -26,5 +27,6 @@ FactoryGirl.define do
     zip { Faker::Address.zip_code }
     email { Faker::Internet.email }
     password 'password'
+    password_confirmation 'password'
   end
 end
