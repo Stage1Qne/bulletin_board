@@ -21,6 +21,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'bullet'
   gem 'faker'
+  gem 'rspec-rails', '~> 3.0'
 end
 
 gem 'sdoc', '~> 0.4.0', group: :doc
