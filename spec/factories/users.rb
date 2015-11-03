@@ -10,6 +10,7 @@ FactoryGirl.define do
     country { Faker::Address.country }
     zip { Faker::Address.zip_code }
     email { Faker::Internet.email }
+    password 'password'
   end
 
   # This will use the User class (Admin would have been guessed)
@@ -24,5 +25,6 @@ FactoryGirl.define do
     country { Faker::Address.country }
     zip { Faker::Address.zip_code }
     email { Faker::Internet.email }
+    password 'password'
   end
 end
