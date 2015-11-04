@@ -1,1 +1,9 @@
-Home page
+%h1 Home page
+%h2 Current user
+%p
+  present? #{current_user.present?}
+%p
+  = link_to 'signup', new_user_registration_path
+  = link_to 'login', new_user_session_path
+  = link_to 'logout', destroy_user_session_path, method: :delete
+
