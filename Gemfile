@@ -5,6 +5,7 @@ gem 'rails', '4.2.1'
 # --- Back end ---
 gem 'pg', '~> 0.18.2'
 gem 'devise', '~> 3.5', '>= 3.5.2'
+gem 'carrierwave', '~> 0.10.0'
 
 # --- Front end ---
 gem 'haml', '~> 4.0', '>= 4.0.7'
