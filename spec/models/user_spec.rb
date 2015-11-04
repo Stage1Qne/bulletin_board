@@ -1,10 +1,14 @@
 require 'rails_helper'
 
-describe User do
+RSpec.describe User, type: :model do
   subject(:user) { build(:user) }
 
   it 'has a valid factory' do
     expect(user).to be_valid
+  end
+
+  it 'require have many ads' do
+    expect(User.reflect_on_association(:ads).macro).to eq(:has_many)
   end
 
   describe 'validations' do
