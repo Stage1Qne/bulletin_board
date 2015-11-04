@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   PERMITED_FIELDS = [:first_name, :last_name, :birthday, :address,
-                     :city, :state, :country, :zip]
+                     :city, :state, :country, :zip, :avatar]
 
   # GET /resource/sign_up
   # def new
