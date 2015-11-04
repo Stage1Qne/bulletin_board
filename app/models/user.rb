@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :birthday, :address,
             :city, :state, :country, :zip, presence: true
 
+  # associations
+  has_many :ads, dependent: :destroy
+
   # enums
   enum role: [:user, :moderator, :admin]
 
