@@ -55,4 +55,10 @@ describe User do
     user.role = 2
     expect(user.admin?).to be true
   end
+
+  it '#full_name' do
+    user.first_name = 'alex'
+    user.last_name = 'DEME'
+    expect(user.full_name).to eq('Alex Deme')
+  end
 end

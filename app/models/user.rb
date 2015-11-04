@@ -8,4 +8,9 @@ class User < ActiveRecord::Base
 
   # enums
   enum role: [:user, :moderator, :admin]
+
+  # methods
+  def full_name
+    [first_name, last_name].map(&:capitalize).join(' ')
+  end
 end
