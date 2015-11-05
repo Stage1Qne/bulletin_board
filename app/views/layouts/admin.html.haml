@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %title BulletinBoard Admin panel
+    = stylesheet_link_tag    'admin_panel', media: 'all'
+    = javascript_include_tag 'admin_panel'
+    = csrf_meta_tags
+  %body
+    = yield
