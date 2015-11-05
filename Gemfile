@@ -19,6 +19,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'bourbon', '~> 4.2', '>= 4.2.6'
 gem 'compass-rails', '~> 2.0', '>= 2.0.5'
+gem 'turbolinks', '~> 2.5', '>= 2.5.3'
 
 group :development, :test do
   gem 'byebug'
