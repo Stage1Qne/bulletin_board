@@ -1,5 +1,7 @@
 %h1 Home page
 
+%p= link_to 'admin_panel', admin_panel_root_path
+
 - if  current_user.present?
   %h2 Current user
   = image_tag current_user.avatar.url
