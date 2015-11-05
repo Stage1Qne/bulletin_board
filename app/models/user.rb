@@ -9,7 +9,10 @@ class User < ActiveRecord::Base
             :city, :state, :country, :zip, presence: true
 
   # associations
-  has_many :ads, dependent: :destroy
+  with_options dependent: :destroy do |u|
+    u.has_many :ads
+    u.has_many :comments
+  end
 
   # enums
   enum role: [:user, :moderator, :admin]

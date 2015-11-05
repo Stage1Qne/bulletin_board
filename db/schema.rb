@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104125709) do
+ActiveRecord::Schema.define(version: 20151105084719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20151104125709) do
   end
 
   add_index "ads", ["user_id"], name: "index_ads_on_user_id", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "ad_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["ad_id"], name: "index_comments_on_ad_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.integer  "role",                   default: 0
@@ -55,4 +66,6 @@ ActiveRecord::Schema.define(version: 20151104125709) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "ads", "users"
+  add_foreign_key "comments", "ads"
+  add_foreign_key "comments", "users"
 end

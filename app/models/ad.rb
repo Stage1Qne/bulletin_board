@@ -3,6 +3,7 @@ class Ad < ActiveRecord::Base
 
   # associations
   belongs_to :user, required: true
+  has_many :comments, dependent: :destroy
 
   # validations
   validates :content, presence: true
