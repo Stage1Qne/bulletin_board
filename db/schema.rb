@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20151105084719) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "picture"
   end
 
   add_index "ads", ["user_id"], name: "index_ads_on_user_id", using: :btree

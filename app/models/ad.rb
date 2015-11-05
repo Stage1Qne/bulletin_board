@@ -1,4 +1,6 @@
 class Ad < ActiveRecord::Base
+  mount_uploader :picture, PictureUploader
+
   # associations
   belongs_to :user, required: true
   has_many :comments, dependent: :destroy
