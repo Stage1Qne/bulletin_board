@@ -1,9 +1,13 @@
 !!!
 %html
   %head
+    %meta{ content: 'width=device-width, initial-scale=1.0', name: 'viewport' }
     %title BulletinBoard Admin panel
-    = stylesheet_link_tag    'admin_panel', media: 'all'
-    = javascript_include_tag 'admin_panel'
+    = stylesheet_link_tag    'admin_panel', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'admin_panel', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = yield
+    .ui.container
+      = render partial: 'admin_panel/partials/header' unless devise_controller?
+
+      = yield

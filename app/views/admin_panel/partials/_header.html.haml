@@ -1,0 +1,9 @@
+%nav
+  .ui.secondary.pointing.menu
+    = link_to admin_panel_root_path, class: "js-admin-nav-link item #{'active' if current_page?(controller: 'dashboard')}" do
+      = semantic_icon('home')
+      Dashboard
+    .right.menu
+      = link_to destroy_user_session_path, method: :delete, class: 'js-admin-nav-link item' do
+        = semantic_icon('sign out')
+        Logout

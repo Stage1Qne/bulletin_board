@@ -1,1 +1,12 @@
-dashboard#index
+.ui.segment
+  Dashboard#index
+
+  %p.notice= notice
+  %p.alert= alert
+
+  = current_user
+  .icons
+    = semantic_icon('user')
+    = semantic_icon('spinner loading')
+  %p
+    Простой русский текст.
