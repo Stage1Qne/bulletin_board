@@ -7,6 +7,7 @@ gem 'pg', '~> 0.18.2'
 gem 'devise', '~> 3.5', '>= 3.5.2'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3', '>= 4.3.6'
+gem 'closure_tree', '~> 6.0'
 
 # --- Front end ---
 gem 'haml', '~> 4.0', '>= 4.0.7'
