@@ -11,6 +11,10 @@ RSpec.describe User, type: :model do
     expect(User.reflect_on_association(:ads).macro).to eq(:has_many)
   end
 
+  it 'require have many comments' do
+    expect(User.reflect_on_association(:comments).macro).to eq(:has_many)
+  end
+
   describe 'validations' do
     it 'require a first name' do
       expect(build(:user, first_name: '')).to_not be_valid

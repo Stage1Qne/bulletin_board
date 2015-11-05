@@ -11,6 +11,10 @@ RSpec.describe Ad, type: :model do
     expect(Ad.reflect_on_association(:user).macro).to eq(:belongs_to)
   end
 
+  it 'require have many comments' do
+    expect(Ad.reflect_on_association(:comments).macro).to eq(:has_many)
+  end
+
   describe 'validations' do
     it 'require a content' do
       expect(build(:ad, content: '')).to_not be_valid
