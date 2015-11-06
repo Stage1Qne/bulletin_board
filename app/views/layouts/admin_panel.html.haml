@@ -8,6 +8,6 @@
     = csrf_meta_tags
   %body
     .ui.container
-      = render partial: 'admin_panel/partials/header' unless devise_controller?
+      = render partial: 'admin_panel/partials/header'
 
       = yield

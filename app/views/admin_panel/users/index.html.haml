@@ -1,7 +1,7 @@
 - content_for :panel_description do
   = render 'admin_panel/partials/panels_descriptions/users/index'
 
--if notice
+- if notice
   .ui.success.message.segment.center.aligned
     %i.close.icon
     .header= notice
