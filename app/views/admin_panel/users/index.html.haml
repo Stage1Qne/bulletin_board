@@ -1,0 +1,44 @@
+- content_for :panel_description do
+  = render 'admin_panel/partials/panels_descriptions/users/index'
+
+-if notice
+  .ui.success.message.segment.center.aligned
+    %i.close.icon
+    .header= notice
+
+.ui.secondary.menu.container
+  .item
+    = link_to(new_admin_panel_user_path, class: 'ui teal labeled icon button js-loading-btn') do
+      %i.add.icon
+      Create user
+  .right.menu
+    .item
+      .ui.icon.input
+        %input{ placeholder: 'Search', type: 'text'}/
+        %i.search.link.teal.icon
+
+%br/
+%table.ui.basic.table.teal
+  %thead
+    %tr
+      %th #
+      %th Role
+      %th Full name
+      %th Email
+      %th Actions
+  %tbody
+    - @users.each do |user|
+      %tr{ data: { id: user.id } }
+        %td= user.id
+        %td= user.role
+        %td= user.full_name
+        %td= user.email
+        %td
+          .ui.basic.buttons
+            = link_to 'Edit', edit_admin_panel_user_path(user), class: 'ui basic button js-loading-btn'
+            = link_to 'Show', admin_panel_user_path(user), class: 'ui basic button js-loading-btn'
+            .ui.basic.button.js-delete-btn{ data: { record_id: user.id, fullpath: request.fullpath } } Delete
+  %tfoot
+    %tr
+      %th{ colspan: '5' }
+
