@@ -12,6 +12,7 @@ gem 'kaminari', '~> 0.16.3'
 gem 'remotipart', '~> 1.2'
 gem 'cancan', '~> 1.6', '>= 1.6.10'
 
+
 # --- Front end ---
 gem 'haml', '~> 4.0', '>= 4.0.7'
 gem 'sass-rails', '~> 5.0'
