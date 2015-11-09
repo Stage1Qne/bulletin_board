@@ -16,6 +16,22 @@ ready = ->
     $(this).parent('form').addClass('loading')
   # --- End form-send-btn
 
+  # --- Start js-delete-record-btn
+  $('.js-delete-record-btn').click ->
+    result = window.confirm('The record will be removed')
+    if result == true
+      item_id = $(this).data('record-id')
+      fullpath = $(this).data('fullpath') + '/'
+      $.ajax
+        type: 'POST'
+        url: fullpath + item_id
+        dataType: 'json'
+        data:
+          _method: 'delete'
+
+        complete: ->
+          $(".js-record[data-id=#{item_id}]").fadeOut(300)
+  # --- End js-delete-record-btn
   # --- End buttons
 
 $(document).ready(ready)
