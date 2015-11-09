@@ -5,7 +5,7 @@ module AdminPanel
     before_action :set_user, only: [:edit, :update, :destroy]
 
     def index
-      @users = User.order(id: :desc)
+      @users = User.page(params[:page])
     end
 
     def new
