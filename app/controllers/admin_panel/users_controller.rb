@@ -1,8 +1,10 @@
 module AdminPanel
   class UsersController < BaseController
-    respond_to :html, :js
+    respond_to :html, except: [:update]
+    respond_to :json, only:   [:destroy, :update]
 
     before_action :set_user, only: [:edit, :update, :destroy]
+    before_action :check_password_params, only: [:update]
 
     def index
       @users = User.page(params[:page])
@@ -23,15 +25,19 @@ module AdminPanel
     def edit; end
 
     def update
-      @user.update_attributes(user_params)
-      flash[:notice] = user_notice_message('successfully updated') if @user.save
-      respond_with(:admin_panel, @user)
+      respond_to do |format|
+        if @user.update_attributes(user_params)
+          format.json { render json: { record_id: @user.id } }
+        else
+          format.json { render json: @user.errors, status: :not_acceptable }
+        end
+      end
     end
 
     def destroy
       @user.destroy
       flash[:notice] = user_notice_message('successfully deleted') if @user.destroy
-      respond_with(:admin, @user)
+      respond_with(:admin_panel, @user)
     end
 
     private
@@ -48,6 +54,11 @@ module AdminPanel
 
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def check_password_params
+      return if params[:user].present? && params[:user][:password].present?
+      params[:user].except!(:password, :password_confirmation)
     end
   end
 end

@@ -1,0 +1,57 @@
+= form_for [:admin_panel, @user], remote: true, data: { model_name: @user.class.name.downcase } do |f|
+  .ui.page.grid
+    .column.center.aligned
+      .ui.message.alert
+        %i.close.icon
+        .header
+          An error occurred while attempting to save the recorded steps:
+        - @user.errors.full_messages.each do |msg|
+          %p= msg
+  .ui.grid.center.aligned
+    .eleven.wide.column
+      .ui.buttons
+        = link_to(admin_panel_users_path, class: 'ui teal labeled icon button js-loading-btn') do
+          %i.reply.icon
+          Back
+        - if @user.persisted?
+          = link_to admin_panel_users_path, class: 'ui teal icon button js-loading-btn' do
+            Show
+          = link_to admin_panel_user_path(@user), class: 'ui teal right labeled icon button js-loading-btn', method: :delete, data: { confirm: 'The record will be removed' } do
+            Delete
+            %i.remove.icon
+      .ui.form.large.segment
+        %h4.ui.dividing.header User information
+        .two.fields
+          .field{ class: "#{required_field_class(params[:action])}" }
+            = f.label :first_name, 'First name'
+            .ui.icon.input
+              = f.text_field :first_name, placeholder: 'First name', type: 'text'
+          .field{ class: "#{required_field_class(params[:action])}" }
+            = f.label :last_name, 'Last name'
+            .ui.icon.input
+              = f.text_field :last_name, placeholder: 'Last name', type: 'text'
+        .field{ class: "#{required_field_class(params[:action])}" }
+          = f.label :email, 'Email'
+          .ui.icon.input
+            = f.email_field :email, placeholder: 'Email', type: 'email'
+        .two.fields
+          .field{class: "#{required_field_class(params[:action])}"}
+            = f.label :password, 'Password'
+            .ui.icon.input
+              = f.password_field :password, autocomplete: 'off', type: 'password'
+              %i.lock.red.icon
+          .field{class: "#{required_field_class(params[:action])}"}
+            = f.label :password_confirmation, 'Password confirmation'
+            .ui.icon.input
+              = f.password_field :password_confirmation, autocomplete: 'off', type: 'password'
+              %i.shield.red.icon
+        / .field
+        /   = f.label :group, "Группа"
+        /   .ui.icon.input
+        /     = f.text_field :group, placeholder: "Номер учебной группы...", type: "text"
+        /     %i.info.blue.icon
+        / .inline.field
+        /   .ui.checkbox
+        /     = f.check_box :teacher, :type => "checkbox"
+        /     = f.label :teacher, "Аккаунт преподавателя"
+        = f.submit 'Submit', class: 'ui teal submit button js-form-send-btn'
