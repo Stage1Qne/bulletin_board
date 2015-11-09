@@ -41,13 +41,5 @@
   %tfoot
     %tr
       %th{ colspan: '5' }
-        .ui.right.floated.pagination.menu
-          %a.icon.item
-            %i.left.chevron.icon
-          %a.item 1
-          %a.item 2
-          %a.item 3
-          %a.item 4
-          %a.icon.item
-            %i.right.chevron.icon
+        = paginate @users, theme: 'admin_panel'
 
