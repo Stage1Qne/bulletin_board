@@ -63,6 +63,8 @@ ajax_form = (form_id) ->
     $form.find('.ui.form').removeClass('loading')
     $form.render_form_errors($form.data('model-name'), data.responseJSON)
 
+  $form.goTo()
+
 humanize = (str) ->
   str.replace(/^[\s_]+|[\s_]+$/g, '').replace(/[_\s]+/g, ' ').replace /^[a-z]/, (m) ->
     m.toUpperCase()
@@ -85,3 +87,9 @@ $.fn.clear_form_errors = () ->
   this.find('.field').removeClass('error')
   this.find('.js-error-label').remove()
 # --- End form functions
+
+# --- Start scroll functions
+$.fn.goTo = ->
+  $('html, body').animate { scrollTop: $(this).offset().top + 'px' }, 'fast'
+  this
+# --- End scroll functions
