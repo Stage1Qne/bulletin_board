@@ -15,7 +15,7 @@
             %i.remove.icon
       .ui.form.large.segment
         %h4.ui.dividing.header User information
-        .two.fields
+        .three.fields
           .field{ class: "#{required_field_class(params[:action])}" }
             = f.label :first_name, 'First name'
             .ui.icon.input
@@ -24,6 +24,10 @@
             = f.label :last_name, 'Last name'
             .ui.icon.input
               = f.text_field :last_name, placeholder: 'Last name', type: 'text'
+          .field{ class: "#{required_field_class(params[:action])}" }
+            = f.label :birthday, 'Birthday'
+            .ui.icon.input
+              = f.text_field :birthday, value: (f.object.birthday.strftime('%d.%m.%Y') if f.object.birthday), placeholder: 'dd.mm.yyyy', type: 'text'
         .field{ class: "#{required_field_class(params[:action])}" }
           = f.label :email, 'Email'
           .ui.icon.input
@@ -39,13 +43,34 @@
             .ui.icon.input
               = f.password_field :password_confirmation, autocomplete: 'off', type: 'password'
               %i.shield.red.icon
-        / .field
-        /   = f.label :group, "Группа"
-        /   .ui.icon.input
-        /     = f.text_field :group, placeholder: "Номер учебной группы...", type: "text"
-        /     %i.info.blue.icon
-        / .inline.field
-        /   .ui.checkbox
-        /     = f.check_box :teacher, :type => "checkbox"
-        /     = f.label :teacher, "Аккаунт преподавателя"
+        %h4.ui.dividing.header Location information
+        .two.fields
+          .field{ class: "#{required_field_class(params[:action])}" }
+            = f.label :country, 'Country'
+            .ui.icon.input
+              = f.text_field :country, placeholder: 'Country', type: 'text'
+          .field{ class: "#{required_field_class(params[:action])}" }
+            = f.label :state, 'State'
+            .ui.icon.input
+              = f.text_field :state, placeholder: 'State', type: 'text'
+        .two.fields
+          .field{ class: "#{required_field_class(params[:action])}" }
+            = f.label :city, 'City'
+            .ui.icon.input
+              = f.text_field :city, placeholder: 'City', type: 'text'
+          .field{ class: "#{required_field_class(params[:action])}" }
+            = f.label :zip, 'Zip'
+            .ui.icon.input
+              = f.text_field :zip, placeholder: 'Zip code', type: 'text'
+        .field{ class: "#{required_field_class(params[:action])}" }
+          = f.label :address, 'Address'
+          .ui.icon.input
+            = f.text_field :address, placeholder: 'Address', type: 'text'
+        %h4.ui.dividing.header User role
+        .inline.fields
+          - User.roles.keys.each do |role|
+            .field
+              .ui.radio.checkbox
+                = f.radio_button :role, role, checked: @user.role == role
+                %label= role.humanize
         = f.submit 'Submit', class: 'ui teal submit button js-form-send-btn'
