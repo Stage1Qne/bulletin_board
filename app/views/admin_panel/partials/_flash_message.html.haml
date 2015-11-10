@@ -1,0 +1,7 @@
+.ui.page.grid
+  .column.center.aligned
+    .ui.message.alert{ class: "#{class_name}" }
+      %i.close.icon
+      .header= header_text
+      - messages.each do |msg|
+        %p= msg
