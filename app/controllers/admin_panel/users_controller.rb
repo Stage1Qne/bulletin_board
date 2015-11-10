@@ -19,7 +19,7 @@ module AdminPanel
       respond_to do |format|
         if @user.save
           flash[:notice] = user_notice_message('successfully added')
-          format.json { render json: { record_id: @user.id } }
+          format.json { render json: { redirect: true, redirect_path: edit_admin_panel_user_path(@user) } }
         else
           format.json { render json: @user.errors, status: :not_acceptable }
         end
@@ -33,7 +33,7 @@ module AdminPanel
     def update
       respond_to do |format|
         if @user.update_attributes(user_params)
-          format.json { render json: { record_id: @user.id } }
+          format.json { render json: { redirect: false } }
         else
           format.json { render json: @user.errors, status: :not_acceptable }
         end

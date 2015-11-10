@@ -52,12 +52,14 @@ ajax_form = (form_id) ->
   return unless $form
 
   $form.on 'ajax:success', (e, data) ->
-    console.log(data)
+    # console.log(data)
+    if data.redirect
+      Turbolinks.visit(data.redirect_path)
     $form.find('.ui.form').removeClass('loading')
     $form.clear_form_errors()
 
   $form.on 'ajax:error', (e, data, status, xhr) ->
-    console.log(data)
+    # console.log(data)
     $form.find('.ui.form').removeClass('loading')
     $form.render_form_errors($form.data('model-name'), data.responseJSON)
 

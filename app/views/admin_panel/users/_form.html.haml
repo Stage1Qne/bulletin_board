@@ -8,7 +8,7 @@
           %i.reply.icon
           Back
         - if @user.persisted?
-          = link_to admin_panel_users_path, class: 'ui teal icon button js-loading-btn' do
+          = link_to admin_panel_user_path(@user), class: 'ui teal icon button js-loading-btn' do
             Show
           = link_to admin_panel_user_path(@user), class: 'ui teal right labeled icon button js-loading-btn', method: :delete, data: { confirm: 'The record will be removed' } do
             Delete
