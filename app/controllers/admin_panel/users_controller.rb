@@ -1,7 +1,7 @@
 module AdminPanel
   class UsersController < BaseController
     respond_to :html, except: [:update]
-    respond_to :json, only:   [:destroy, :update]
+    respond_to :json, only:   [:destroy, :update, :create]
 
     before_action :set_user, only: [:edit, :update, :destroy]
     before_action :check_password_params, only: [:update]
@@ -16,8 +16,14 @@ module AdminPanel
 
     def create
       @user = User.new(user_params)
-      flash[:notice] = user_notice_message('successfully added') if @user.save
-      respond_with(:admin_panel, @user)
+      respond_to do |format|
+        if @user.save
+          flash[:notice] = user_notice_message('successfully added')
+          format.json { render json: { record_id: @user.id } }
+        else
+          format.json { render json: @user.errors, status: :not_acceptable }
+        end
+      end
     end
 
     def show; end
