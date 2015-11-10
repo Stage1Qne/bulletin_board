@@ -35,14 +35,18 @@ ready = ->
       complete: ->
         $(".js-record[data-id=#{item_id}]").fadeOut(300)
   # --- End js-delete-record-btn
-  # --- End buttons
 
+  # --- Start close flash message btn
+  $('.message .close').on 'click', ->
+    $(this).closest('.message').transition 'fade'
+  # --- End close flash message btn
+  # --- End buttons
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
 
 
-# --- Start forms
+# --- Start form functions
 ajax_form = (form_id) ->
   $form = $("##{form_id}")
   return unless $form
@@ -57,6 +61,9 @@ ajax_form = (form_id) ->
     $form.find('.ui.form').removeClass('loading')
     $form.render_form_errors($form.data('model-name'), data.responseJSON)
 
+humanize = (str) ->
+  str.replace(/^[\s_]+|[\s_]+$/g, '').replace(/[_\s]+/g, ' ').replace /^[a-z]/, (m) ->
+    m.toUpperCase()
 
 $.fn.render_form_errors = (model_name, errors) ->
   form = this
@@ -67,8 +74,12 @@ $.fn.render_form_errors = (model_name, errors) ->
       name = $(this).attr('name')
       if name
         name.match(new RegExp(model_name + '\\[' + field + '\\(?'))
-    input.closest('.field').addClass('error')
+    field_errors_messages = $.map(messages, (m) -> m.charAt(0).toUpperCase() + m.slice(1)).join('<br />')
+    $field = input.closest('.field')
+    $field.addClass('error')
+          .append("<div class='ui pointing red basic label js-error-label'>#{field_errors_messages}</div>")
 
 $.fn.clear_form_errors = () ->
   this.find('.field').removeClass('error')
-# --- End forms
+  this.find('.js-error-label').remove()
+# --- End form functions
