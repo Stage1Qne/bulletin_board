@@ -36,15 +36,24 @@ ready = ->
         $(".js-record[data-id=#{item_id}]").fadeOut(300)
   # --- End js-delete-record-btn
 
-  # --- Start close flash message btn
+  # --- End buttons
+
+  # --- Start semantic ui
   $('.message .close').on 'click', ->
     $(this).closest('.message').transition 'fade'
-  # --- End close flash message btn
-  # --- End buttons
+  # --- End semantic ui
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
 
+
+# --- Start redirects
+redirectTo = (url) ->
+  if $('#page-dimmer').hasClass('active')
+    setTimeout(redirectTo(url), 3000)
+  else
+    Turbolinks.visit(url)
+# --- End redirects
 
 # --- Start form functions
 ajax_form = (form_id) ->
@@ -52,14 +61,14 @@ ajax_form = (form_id) ->
   return unless $form
 
   $form.on 'ajax:success', (e, data) ->
-    # console.log(data)
+    if data.dimmer_message
+      showPageDimmer('checkmark', data.dimmer_message)
     if data.redirect
-      Turbolinks.visit(data.redirect_path)
+      redirectTo(data.redirect_path)
     $form.find('.ui.form').removeClass('loading')
     $form.clear_form_errors()
 
   $form.on 'ajax:error', (e, data, status, xhr) ->
-    # console.log(data)
     $form.find('.ui.form').removeClass('loading')
     $form.render_form_errors($form.data('model-name'), data.responseJSON)
 
@@ -93,3 +102,9 @@ $.fn.goTo = ->
   $('html, body').animate { scrollTop: $(this).offset().top + 'px' }, 'fast'
   this
 # --- End scroll functions
+
+# --- Start dimmers
+showPageDimmer = (icon_class, str) ->
+  $('.js-page-dimmer-content').html("<i class='#{icon_class} icon'/><p>#{str}</p>")
+  $('#page-dimmer').dimmer('show')
+# --- End dimmers
