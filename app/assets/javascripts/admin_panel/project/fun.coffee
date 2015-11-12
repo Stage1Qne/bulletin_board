@@ -47,6 +47,14 @@ $(document).ready(ready)
 $(document).on('page:load', ready)
 
 
+# --- Start redirects
+redirectTo = (url) ->
+  if $('#page-dimmer').hasClass('active')
+    setTimeout(redirectTo(url), 3000)
+  else
+    Turbolinks.visit(url)
+# --- End redirects
+
 # --- Start form functions
 ajax_form = (form_id) ->
   $form = $("##{form_id}")
@@ -56,7 +64,7 @@ ajax_form = (form_id) ->
     if data.dimmer_message
       showPageDimmer('checkmark', data.dimmer_message)
     if data.redirect
-      waitPageDimmerClose().done(Turbolinks.visit(data.redirect_path))
+      redirectTo(data.redirect_path)
     $form.find('.ui.form').removeClass('loading')
     $form.clear_form_errors()
 
@@ -99,12 +107,4 @@ $.fn.goTo = ->
 showPageDimmer = (icon_class, str) ->
   $('.js-page-dimmer-content').html("<i class='#{icon_class} icon'/><p>#{str}</p>")
   $('#page-dimmer').dimmer('show')
-
-waitPageDimmerClose = ->
-  # r = $.Deferred()
-  while $('#page-dimmer').hasClass('active')
-    setTimeout (->
-      console.log('asd')
-    ), 3000
-  $.Deferred().resolve()
 # --- End dimmers
