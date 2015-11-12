@@ -49,10 +49,12 @@ $(document).on('page:load', ready)
 
 # --- Start redirects
 redirectTo = (url) ->
-  if $('#page-dimmer').hasClass('active')
-    setTimeout(redirectTo(url), 3000)
-  else
-    Turbolinks.visit(url)
+  interval = setInterval((->
+    unless $('body').hasClass('dimmed')
+      clearInterval interval
+      Turbolinks.visit(url)
+    console.log('!')
+  ), 800)
 # --- End redirects
 
 # --- Start form functions
