@@ -35,6 +35,7 @@ ready = ->
       complete: ->
         $(".js-record[data-id=#{item_id}]").fadeOut(300)
   # --- End js-delete-record-btn
+
   # --- End buttons
 
   # --- Start semantic ui
