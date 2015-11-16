@@ -9,6 +9,7 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3', '>= 4.3.6'
 gem 'closure_tree', '~> 6.0'
 gem 'kaminari', '~> 0.16.3'
+gem 'remotipart', '~> 1.2'
 
 # --- Front end ---
 gem 'haml', '~> 4.0', '>= 4.0.7'

@@ -49,10 +49,12 @@ $(document).on('page:load', ready)
 
 # --- Start redirects
 redirectTo = (url) ->
-  if $('#page-dimmer').hasClass('active')
-    setTimeout(redirectTo(url), 3000)
-  else
-    Turbolinks.visit(url)
+  interval = setInterval((->
+    unless $('body').hasClass('dimmed')
+      clearInterval interval
+      Turbolinks.visit(url)
+    console.log('!')
+  ), 800)
 # --- End redirects
 
 # --- Start form functions
@@ -60,7 +62,8 @@ ajax_form = (form_id) ->
   $form = $("##{form_id}")
   return unless $form
 
-  $form.on 'ajax:success', (e, data) ->
+  $form.on 'ajax:success', (e, data, status, xhr) ->
+    # console.log(data)
     if data.dimmer_message
       showPageDimmer('checkmark', data.dimmer_message)
     if data.redirect
@@ -69,6 +72,7 @@ ajax_form = (form_id) ->
     $form.clear_form_errors()
 
   $form.on 'ajax:error', (e, data, status, xhr) ->
+    # console.log(data)
     $form.find('.ui.form').removeClass('loading')
     $form.render_form_errors($form.data('model-name'), data.responseJSON)
 

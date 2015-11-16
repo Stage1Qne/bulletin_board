@@ -1,8 +1,6 @@
-= form_for [:admin_panel, @user], remote: true, data: { model_name: @user.class.name.downcase } do |f|
+= form_for [:admin_panel, @user], html: { multipart: true }, remote: true, data: { model_name: @user.class.name.downcase, type: :json } do |f|
   - if @user.errors.any?
     = flash_message('error', 'An error occurred while attempting to save the recorded steps:', @user.errors.full_messages)
-  - if notice
-    = flash_message('success', 'User actions', [notice])
   .ui.grid.center.aligned
     .eleven.wide.column
       .ui.buttons
