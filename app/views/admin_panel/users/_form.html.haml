@@ -32,15 +32,6 @@
           = f.label :email, 'Email'
           .ui.icon.input
             = f.email_field :email, placeholder: 'Email', type: 'email'
-        .field
-          = f.label :avatar, 'Avatar'
-          .ui.action.input
-            = f.file_field :avatar
-            %button.ui.teal.labeled.icon.button
-              %i.copy.icon
-              Open
-
-
         .two.fields
           .field{class: "#{required_field_class(params[:action])}"}
             = f.label :password, 'Password'
