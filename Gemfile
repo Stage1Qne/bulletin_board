@@ -10,6 +10,7 @@ gem 'mini_magick', '~> 4.3', '>= 4.3.6'
 gem 'closure_tree', '~> 6.0'
 gem 'kaminari', '~> 0.16.3'
 gem 'remotipart', '~> 1.2'
+gem 'cancan', '~> 1.6', '>= 1.6.10'
 
 # --- Front end ---
 gem 'haml', '~> 4.0', '>= 4.0.7'
