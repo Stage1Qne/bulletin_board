@@ -1,7 +1,4 @@
 class User < ActiveRecord::Base
-  # constants
-  ADMIN_PANEL_ROLES = %w(admin moderator)
-
   # devise
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
