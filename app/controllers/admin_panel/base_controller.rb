@@ -1,12 +1,24 @@
 module AdminPanel
   class BaseController < ActionController::Base
     layout 'admin_panel'
-    load_and_authorize_resource
-
     protect_from_forgery with: :exception
 
-    rescue_from CanCan::AccessDenied do |exception|
-      redirect_to root_url, alert: exception.message
+    before_action :authenticate_user!
+    before_action :verify_access
+
+    def render_403
+      render file: "#{Rails.root}/public/403.html", status: 403, layout: false
+    end
+
+    # cancan ability rescue
+    rescue_from CanCan::AccessDenied do
+      render_403
+    end
+
+    private
+
+    def verify_access
+      render_403 if current_user.default_user?
     end
   end
 end
