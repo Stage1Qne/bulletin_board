@@ -15,6 +15,10 @@ module AdminPanel
       render_403
     end
 
+    def current_ability
+      @current_ability ||= AdminPanel::Ability.new(current_user)
+    end
+
     private
 
     def verify_access
