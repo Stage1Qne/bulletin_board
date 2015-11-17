@@ -1,7 +1,12 @@
 class User < ActiveRecord::Base
+  # constants
+  ADMIN_PANEL_ROLES = %w(admin moderator)
+
+  # devise
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # uploaders
   mount_uploader :avatar, AvatarUploader
 
   # validations
@@ -15,7 +20,7 @@ class User < ActiveRecord::Base
   end
 
   # enums
-  enum role: [:user, :moderator, :admin]
+  enum role: [:default_user, :moderator, :admin]
 
   # methods
   def full_name
