@@ -1,5 +1,6 @@
 module AdminPanel
   class UsersController < BaseController
+    load_and_authorize_resource
     respond_to :html, except: [:update]
     respond_to :json, only:   [:destroy, :update, :create]
 
