@@ -33,7 +33,7 @@
           .ui.basic.buttons
             = link_to 'Show', admin_panel_ad_path(ad), class: 'ui basic button js-loading-btn'
             - if can? :manage, Ad
-              = link_to 'Edit', edit_admin_panel_ad_path(ad), class: 'ui basic button js-loading-btn'
+              = link_to 'Edit', edit_admin_panel_ad_path(ad, link_to_back_path: request.fullpath), class: 'ui basic button js-loading-btn'
               .ui.basic.button.js-delete-record-btn{ data: { record_id: ad.id, fullpath: request.path } } Delete
   %tfoot
     %tr
