@@ -11,9 +11,9 @@ class User < ActiveRecord::Base
             :city, :state, :country, :zip, presence: true
 
   # associations
-  with_options dependent: :destroy do |u|
-    u.has_many :ads
-    u.has_many :comments
+  with_options dependent: :destroy do |user|
+    user.has_many :ads
+    user.has_many :comments
   end
 
   # enums

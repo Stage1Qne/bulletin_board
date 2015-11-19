@@ -1,0 +1,42 @@
+- content_for :panel_description do
+  = render partial: 'admin_panel/partials/panels_descriptions/ads/index'
+
+- if notice
+  .ui.success.message.segment.center.aligned
+    %i.close.icon
+    .header= notice
+
+.ui.secondary.menu.container
+  .right.menu
+    .item
+      .ui.icon.input
+        %input{ placeholder: 'Search', type: 'text'}/
+        %i.search.link.olive.icon
+
+%br/
+%table.ui.basic.table.olive
+  %thead
+    %tr
+      %th #
+      %th User
+      %th Picture
+      %th Content
+      %th Actions
+  %tbody
+    - @ads.each do |ad|
+      %tr.js-record{ data: { id: ad.id } }
+        %td= ad.id
+        %td= link_to ad.user.full_name, admin_panel_user_path(ad.user)
+        %td= image_tag ad.picture.url, height: 100
+        %td= ad.content.truncate(50)
+        %td
+          .ui.basic.buttons
+            = link_to 'Show', admin_panel_ad_path(ad), class: 'ui basic button js-loading-btn'
+            - if can? :manage, Ad
+              = link_to 'Edit', edit_admin_panel_ad_path(ad), class: 'ui basic button js-loading-btn'
+              .ui.basic.button.js-delete-record-btn{ data: { record_id: ad.id, fullpath: request.path } } Delete
+  %tfoot
+    %tr
+      %th{ colspan: '5' }
+        = paginate @ads, theme: 'admin_panel'
+

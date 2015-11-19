@@ -54,5 +54,6 @@ Rails.application.routes.draw do
   namespace :admin_panel do
     root 'dashboard#index'
     resources :users
+    resources :ads
   end
 end

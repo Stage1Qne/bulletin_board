@@ -1,0 +1,14 @@
+.ui.centered.card
+  .image
+    = image_tag user.avatar.url
+  .content
+    = link_to user.full_name, admin_panel_user_path(user)
+    .meta
+      %span.date= user.email
+  .extra.content
+    .ui.small.basic.icon.buttons
+      = link_to 'Show', admin_panel_user_path(user), class: 'ui button js-loading-btn'
+      - if can? :manage, User
+        = link_to 'Edit', edit_admin_panel_user_path(user, link_to_back_path: request.path), class: 'ui button js-loading-btn'
+        = link_to admin_panel_user_path(user), class: 'ui button js-loading-btn', method: :delete, data: { confirm: 'The record will be removed' } do
+          Delete

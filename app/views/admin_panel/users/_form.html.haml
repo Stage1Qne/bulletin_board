@@ -4,7 +4,7 @@
   .ui.grid.center.aligned
     .eleven.wide.column
       .ui.buttons
-        = link_to(admin_panel_users_path, class: 'ui teal labeled icon button js-loading-btn') do
+        = link_to(link_to_back_path(admin_panel_users_path), class: 'ui teal labeled icon button js-loading-btn') do
           %i.reply.icon
           Back
         - if @user.persisted?
