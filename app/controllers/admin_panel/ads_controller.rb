@@ -49,7 +49,7 @@ module AdminPanel
     private
 
     def ad_notice_message(msg)
-      "Ad ##{@ad.id} #{@ad.full_name} #{msg}"
+      "Ad ##{@ad.id} #{msg}"
     end
 
     def ad_params
