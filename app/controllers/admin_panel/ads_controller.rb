@@ -7,7 +7,7 @@ module AdminPanel
     before_action :set_ad, only: [:edit, :update, :destroy]
 
     def index
-      @ads = Ad.page(params[:page])
+      @ads = Ad.includes(:user).page(params[:page])
     end
 
     def new
