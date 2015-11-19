@@ -10,22 +10,6 @@ module AdminPanel
       @ads = Ad.includes(:user).page(params[:page])
     end
 
-    def new
-      @ad = Ad.new
-    end
-
-    def create
-      @ad = Ad.new(ad_params)
-      respond_to do |format|
-        if @ad.save
-          flash[:notice] = ad_notice_message('successfully added')
-          format.json { render json: { redirect: true, redirect_path: edit_admin_panel_ad_path(@ad), dimmer_message: ad_notice_message('successfully created') }, status: :created }
-        else
-          format.json { render json: @ad.errors, status: :not_acceptable }
-        end
-      end
-    end
-
     def show; end
 
     def edit; end
