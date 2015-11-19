@@ -14,6 +14,8 @@
             Delete
             %i.remove.icon
       .ui.form.large.segment
+        %h4.ui.dividing.header User information
+        = render partial: 'admin_panel/users/card', locals: { user: @ad.user }
         %h4.ui.dividing.header Ad information
         .field
           = f.label :content, 'Content'
