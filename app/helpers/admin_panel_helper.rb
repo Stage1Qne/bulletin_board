@@ -14,4 +14,12 @@ module AdminPanelHelper
       messages: messages
     }
   end
+
+  def link_to_back_path(path)
+    if params[:link_to_back_path].present?
+      params[:link_to_back_path]
+    else
+      path
+    end
+  end
 end
