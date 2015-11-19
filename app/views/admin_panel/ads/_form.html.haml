@@ -1,10 +1,10 @@
 = form_for [:admin_panel, @ad], html: { multipart: true }, remote: true, data: { model_name: @ad.class.name.downcase, type: :json } do |f|
   - if @ad.errors.any?
-    = flash_message('error', 'An error occurred while attempting to save the recorded steps:', @user.errors.full_messages)
+    = flash_message('error', 'An error occurred while attempting to save the recorded steps:', @ad.errors.full_messages)
   .ui.grid.center.aligned
     .eleven.wide.column
       .ui.buttons
-        = link_to(admin_panel_ads_path, class: 'ui olive labeled icon button js-loading-btn') do
+        = link_to(link_to_back_path(admin_panel_ads_path), class: 'ui olive labeled icon button js-loading-btn') do
           %i.reply.icon
           Back
         - if @ad.persisted?

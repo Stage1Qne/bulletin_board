@@ -10,6 +10,9 @@
       = link_to admin_panel_ads_path, class: "js-admin-panel-nav-link item #{active_nav_class('ads', controller_name)}" do
         = semantic_icon('newspaper')
         Ads
+      = link_to admin_panel_comments_path, class: "js-admin-panel-nav-link item #{active_nav_class('comments', controller_name)}" do
+        = semantic_icon('comments outline')
+        Comments
       .right.menu
         = link_to destroy_user_session_path, method: :delete, class: 'js-admin-panel-nav-link item' do
           = semantic_icon('sign out')
