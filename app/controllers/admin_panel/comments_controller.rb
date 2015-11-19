@@ -1,13 +1,13 @@
 module AdminPanel
   class CommentsController < BaseController
-    locomment_and_authorize_resource
+    load_and_authorize_resource
     respond_to :html, except: [:update]
     respond_to :json, only:   [:destroy, :update, :create]
 
     before_action :set_comment, only: [:edit, :update, :destroy]
 
     def index
-      @comments = Comment.includes(:user).page(params[:page])
+      @comments = Comment.includes(:user, :ad).page(params[:page])
     end
 
     def show; end

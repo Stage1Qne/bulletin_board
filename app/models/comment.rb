@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  has_closure_tree
+  has_closure_tree dependent: :destroy
 
   # associations
   with_options required: true do |c|

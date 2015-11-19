@@ -1,0 +1,24 @@
+= form_for [:admin_panel, @comment], html: { multipart: true }, remote: true, data: { model_name: @comment.class.name.downcase, type: :json } do |f|
+  - if @comment.errors.any?
+    = flash_message('error', 'An error occurred while attempting to save the recorded steps:', @comment.errors.full_messages)
+  .ui.grid.center.aligned
+    .eleven.wide.column
+      .ui.buttons
+        = link_to(link_to_back_path(admin_panel_comments_path), class: 'ui blue labeled icon button js-loading-btn') do
+          %i.reply.icon
+          Back
+        - if @comment.persisted?
+          = link_to admin_panel_comment_path(@comment), class: 'ui blue icon button js-loading-btn' do
+            Show
+          = link_to admin_panel_comment_path(@comment), class: 'ui blue right labeled icon button js-loading-btn', method: :delete, data: { confirm: 'The record will be removed' } do
+            Delete
+            %i.remove.icon
+      .ui.form.large.segment
+        %h4.ui.dividing.header User information
+        = render partial: 'admin_panel/users/card', locals: { user: @comment.user }
+        %h4.ui.dividing.header Comment information
+        .field
+          = f.label :content, 'Content'
+          .ui.icon.input
+            = f.text_area :content, placeholder: 'Content', type: 'text'
+        = f.submit 'Submit', class: 'ui blue submit button js-form-send-btn'
