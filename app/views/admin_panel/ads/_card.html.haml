@@ -1,0 +1,14 @@
+.ui.card{ class: "#{card_style}" }
+  .image
+    = image_tag ad.picture.url
+  .content
+    = link_to "##{ad.id}", admin_panel_ad_path(ad)
+    .meta
+      %span.date= ad.created_at.strftime("Created at %d.%m.%Y")
+  .extra.content
+    .ui.small.basic.icon.buttons
+      = link_to 'Show', admin_panel_ad_path(ad), class: 'ui button js-loading-btn'
+      - if can? :manage, Ad
+        = link_to 'Edit', edit_admin_panel_ad_path(ad, link_to_back_path: request.fullpath), class: 'ui button js-loading-btn'
+        = link_to admin_panel_ad_path(ad), class: 'ui button js-loading-btn', method: :delete, data: { confirm: 'The record will be removed' } do
+          Delete

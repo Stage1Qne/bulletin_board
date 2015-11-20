@@ -14,8 +14,10 @@
             Delete
             %i.remove.icon
       .ui.form.large.segment
-        %h4.ui.dividing.header User information
-        = render partial: 'admin_panel/users/card', locals: { user: @comment.user }
+        %h4.ui.dividing.header User and Ad information
+        .ui.two.cards
+          = render partial: 'admin_panel/users/card', locals: { user: @comment.user, card_style: nil}
+          = render partial: 'admin_panel/ads/card', locals: { ad: @comment.ad, card_style: nil }
         %h4.ui.dividing.header Comment information
         .field
           = f.label :content, 'Content'
