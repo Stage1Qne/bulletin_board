@@ -5,7 +5,6 @@
 %p= link_to 'admin_panel', admin_panel_root_path
 
 - if  current_user.present?
-
   %h2 Current user
   = image_tag current_user.avatar.url, height: 150
   %p= link_to 'logout', destroy_user_session_path, method: :delete
