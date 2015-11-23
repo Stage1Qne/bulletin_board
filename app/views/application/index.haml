@@ -10,7 +10,9 @@
   = image_tag current_user.avatar.url, height: 150
   %p= link_to 'logout', destroy_user_session_path, method: :delete
   %p= link_to 'edit', edit_user_registration_path
+
 - else
+
   %p
     = link_to 'signup', new_user_registration_path
     = link_to 'login', new_user_session_path
