@@ -22,10 +22,10 @@
 %table.ui.basic.table.teal
   %thead
     %tr
-      %th #
-      %th Role
-      %th Full name
-      %th Email
+      %th= sortable_link('#', 'id')
+      %th= sortable_link('Role', 'role')
+      %th= sortable_link('Full name', 'last_name', 'first_name')
+      %th= sortable_link('Email', 'email')
       %th Actions
   %tbody
     - @users.each do |user|
