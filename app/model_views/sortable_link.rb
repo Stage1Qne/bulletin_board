@@ -2,7 +2,7 @@ class SortableLink
   include ActionView::Helpers::UrlHelper
   include SemanticIconHelper
 
-  def initialize(title: , columns: [], path: , params: {})
+  def initialize(title:, columns: [], path:, params: {})
     @title = title
     @columns = columns
     @path = path
@@ -18,7 +18,7 @@ class SortableLink
   attr_reader :title, :columns, :path, :params
 
   def direction
-    return 'desc' if params[:sort].blank?
+    return 'desc' unless params[:sort] && current_columns?
     params[:sort][:direction] == 'asc' ? 'desc' : 'asc'
   end
 
@@ -28,7 +28,7 @@ class SortableLink
   end
 
   def link_text
-    if params[:sort] && columns == params[:sort][:columns]
+    if params[:sort] && current_columns?
       "#{title}#{caret}".html_safe
     else
       title
@@ -41,5 +41,9 @@ class SortableLink
 
   def link_options
     { sort: { columns: columns, direction: direction } }
+  end
+
+  def current_columns?
+    columns == params[:sort][:columns]
   end
 end
