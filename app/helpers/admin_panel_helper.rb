@@ -22,4 +22,8 @@ module AdminPanelHelper
       path
     end
   end
+
+  def sortable_link(title, *columns)
+    SortableLink.new(title: title, columns: columns, path: request.path, params: params).render
+  end
 end
