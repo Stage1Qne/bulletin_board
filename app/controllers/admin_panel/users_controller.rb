@@ -1,5 +1,7 @@
 module AdminPanel
   class UsersController < BaseController
+    include Sortable
+
     load_and_authorize_resource
     respond_to :html, except: [:update]
     respond_to :json, only:   [:destroy, :update, :create]
@@ -8,7 +10,7 @@ module AdminPanel
     before_action :check_password_params, only: [:update]
 
     def index
-      @users = User.page(params[:page])
+      @users = User.order(sortable_query).page(params[:page])
     end
 
     def new
