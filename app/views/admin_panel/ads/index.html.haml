@@ -17,10 +17,10 @@
 %table.ui.basic.table.olive
   %thead
     %tr
-      %th #
-      %th User
+      %th= sortable_link('#', 'id')
+      %th= sortable_link('User', 'users.last_name', 'users.first_name')
       %th Picture
-      %th Content
+      %th= sortable_link('Content', 'content')
       %th Actions
   %tbody
     - @ads.each do |ad|
