@@ -49,9 +49,9 @@ RSpec.describe User, type: :model do
     end
   end
 
-  it '#user?' do
+  it '#default_user?' do
     user.role = 0
-    expect(user.user?).to be true
+    expect(user.default_user?).to be true
   end
 
   it '#moderator?' do
