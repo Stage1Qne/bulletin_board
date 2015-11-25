@@ -1,4 +1,5 @@
 class Ad < ActiveRecord::Base
+  # uploaders
   mount_uploader :picture, PictureUploader
 
   # associations
