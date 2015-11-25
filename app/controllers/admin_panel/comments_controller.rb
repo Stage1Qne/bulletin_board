@@ -1,5 +1,7 @@
 module AdminPanel
   class CommentsController < BaseController
+    include Sortable
+
     load_and_authorize_resource
     respond_to :html, except: [:update]
     respond_to :json, only:   [:destroy, :update, :create]
@@ -7,7 +9,7 @@ module AdminPanel
     before_action :set_comment, only: [:edit, :update, :destroy]
 
     def index
-      @comments = Comment.includes(:user, :ad).page(params[:page])
+      @comments = Comment.includes(:user, :ad).order(sortable_query).page(params[:page])
     end
 
     def show; end

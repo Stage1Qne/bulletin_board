@@ -17,10 +17,10 @@
 %table.ui.basic.table.blue
   %thead
     %tr
-      %th #
-      %th User
-      %th Ad
-      %th Content
+      %th= sortable_link('#', 'id')
+      %th= sortable_link('User', 'users.last_name', 'users.first_name')
+      %th= sortable_link('Ad', 'ad_id')
+      %th= sortable_link('Content', 'content')
       %th Actions
   %tbody
     - @comments.each do |comment|
