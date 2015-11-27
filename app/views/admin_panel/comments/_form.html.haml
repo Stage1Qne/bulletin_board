@@ -10,7 +10,7 @@
         - if @comment.persisted?
           = link_to admin_panel_comment_path(@comment), class: 'ui blue icon button js-loading-btn' do
             Show
-          = link_to admin_panel_comment_path(@comment), class: 'ui blue right labeled icon button js-loading-btn', method: :delete, data: { confirm: 'The record will be removed' } do
+          = link_to admin_panel_comment_path(@comment, redirect_path: link_to_back_path(admin_panel_comments_path)), class: 'ui blue right labeled icon button js-loading-btn', method: :delete, data: { confirm: 'The record will be removed' } do
             Delete
             %i.remove.icon
       .ui.form.large.segment
