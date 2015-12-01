@@ -10,7 +10,7 @@
         - if @ad.persisted?
           = link_to admin_panel_ad_path(@ad), class: 'ui olive icon button js-loading-btn' do
             Show
-          = link_to admin_panel_ad_path(@ad), class: 'ui olive right labeled icon button js-loading-btn', method: :delete, data: { confirm: 'The record will be removed' } do
+          = link_to admin_panel_ad_path(@ad, link_to_back_path(admin_panel_ads_path)), class: 'ui olive right labeled icon button js-loading-btn', method: :delete, data: { confirm: 'The record will be removed' } do
             Delete
             %i.remove.icon
       .ui.form.large.segment

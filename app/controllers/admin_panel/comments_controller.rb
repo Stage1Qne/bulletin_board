@@ -28,8 +28,12 @@ module AdminPanel
 
     def destroy
       @comment.destroy
-      flash[:notice] = comment_notice_message('successfully deleted') if @comment.destroy
-      respond_with(:admin_panel, @comment)
+      if params[:redirect_path].present?
+        flash[:notice] = comment_notice_message('successfully deleted')
+        respond_with(:admin_panel, @comment, location: params[:redirect_path])
+      else
+        respond_with(:admin_panel, @comment)
+      end
     end
 
     private

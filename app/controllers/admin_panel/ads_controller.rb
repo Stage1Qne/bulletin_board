@@ -28,8 +28,12 @@ module AdminPanel
 
     def destroy
       @ad.destroy
-      flash[:notice] = ad_notice_message('successfully deleted') if @ad.destroy
-      respond_with(:admin_panel, @ad)
+      if params[:redirect_path].present?
+        flash[:notice] = ad_notice_message('successfully deleted')
+        respond_with(:admin_panel, @ad, location: params[:redirect_path])
+      else
+        respond_with(:admin_panel, @ad)
+      end
     end
 
     private
